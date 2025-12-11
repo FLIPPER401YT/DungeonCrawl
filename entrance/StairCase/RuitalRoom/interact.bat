@@ -1,3 +1,6 @@
+Rem Hi there! If you are reading this, your taking the first step to learning
+Rem windows batch scripts!!
+
 @ echo off
 
 call start.bat
