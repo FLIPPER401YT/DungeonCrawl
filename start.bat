@@ -1,6 +1,11 @@
 @echo off
-REM Initialize player health
+REM Initialize player health, room, and inventory
 set HP=10
+set Room=start
+set SlotOne=none
+set SlotTwo=none
+set SlotThree=none
+set Weapon=fist
 
 echo -
 echo Welcome to the Dungeon Crawl!

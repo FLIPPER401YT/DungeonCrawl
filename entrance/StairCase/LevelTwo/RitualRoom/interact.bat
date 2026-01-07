@@ -6,6 +6,7 @@ REM windows batch scripts!!
 REM ecall start.bat
 
 set HP=%HP%
+set Room=RitualRoom
 
 
 echo -
@@ -14,7 +15,7 @@ echo Crying Woman - Oh goodness sake! My hero, do you happen to have any thing t
 
 set /P userInput=(y/n):
 
-if /I "%userInput%"=="y" (
+if /I "%userInput%"=="y" if "%SlotOne%"=="food" if "%SlotTwo%"="food" if "%SlotThree%"="food" (
     echo You lied to the crying woman shameful
     echo .
     echo Crying Woman - Oh deary would you mind sharing a bite?
@@ -40,7 +41,11 @@ if /I "%userInput%"=="y" (
     TIMEOUT /T 2 /NOBREAK >NUL
     echo "Crying noises..."
 ) else (
-    echo no
+    echo No...
+    echo "Crying gets louder"
+    echo It has been so long since I had even a small morsel
+    echo So long...
+    echo 
 )
 pause
 
