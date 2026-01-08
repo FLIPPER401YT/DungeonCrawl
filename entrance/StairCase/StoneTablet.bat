@@ -7,7 +7,7 @@ if "%Room%"=="entrance" (
   echo -
   
   cd LevelTwo
-  TIMEOUT /T 2 /NOBREAK >NUL
+  pause
   StoneTablet.bat
 ) else (
     echo -
@@ -16,6 +16,6 @@ if "%Room%"=="entrance" (
     echo -
 
     cd ..
-    TIMEOUT /T 2 /NOBREAK >NUL
+    pause
     StoneTablet.bat
 )
