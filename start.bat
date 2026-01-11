@@ -2,10 +2,12 @@
 REM Initialize player health, room, and inventory
 set HP=10
 set Room=start
-set SlotOne=none
-set SlotTwo=none
-set SlotThree=none
-set Weapon=fist
+set SlotOne=None
+set SlotTwo=None
+set SlotThree=None
+set Weapon=Fist
+set Damage=0
+set Coins=100
 
 echo(
 echo Welcome to the Dungeon Crawl!

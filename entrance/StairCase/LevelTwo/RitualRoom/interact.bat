@@ -6,8 +6,8 @@ REM windows batch scripts!!
 
 REM ecall start.bat
 
-set HP=%HP%
 set Room=RitualRoom
+set "moveBack=0"
 
 if not defined RitualRoomOn (
     set RitualRoomOn=0
@@ -23,17 +23,17 @@ if !RitualRoomOn!==0 (
     
     if /I "!userInput!"=="y" (
         set hasFood=0
-        if "%SlotOne%"=="food" (
+        if /I "%SlotOne%"=="food" (
             set hasFood=1
-	    set SlotOne=none
+	    set SlotOne=None
         ) else (
-            if "%SlotTwo%"=="food" (
+            if /I "%SlotTwo%"=="food" (
                 set hasFood=1
-		set SlotTwo=none
+		set SlotTwo=None
             ) else (
-                if "%SlotThree%"=="food" (
+                if /I "%SlotThree%"=="food" (
                     set hasFood=1
-		    set SlotThree=none
+		    set SlotThree=None
                 ) else (
 		    set hasFood = 0
 		)
@@ -60,7 +60,7 @@ if !RitualRoomOn!==0 (
             TIMEOUT /T 2 /NOBREAK >NUL
             echo Crying Woman - ...
             TIMEOUT /T 2 /NOBREAK >NUL
-            echo Crying Woman - What
+            echo Crying Woman - What?
             TIMEOUT /T 2 /NOBREAK >NUL
             echo Crying Woman - You mean to say you don't have anything
             TIMEOUT /T 2 /NOBREAK >NUL
@@ -68,14 +68,19 @@ if !RitualRoomOn!==0 (
             TIMEOUT /T 2 /NOBREAK >NUL
             echo Crying Woman - YOU CONNIVING FOOL!!!
             echo Crying Woman - TAKE THIS!
+            set /A HP-=1 > NUL
             TIMEOUT /T 2 /NOBREAK >NUL
-            %DAMAGEFLASH%
+            call %DAMAGEFLASH%
             echo(
             echo You have taken 1 damage
-            set /A HP=%HP% - 1 > NUL
-            echo Your HP is now %HP%
+            echo Your HP is now !HP!
             echo(
             TIMEOUT /T 2 /NOBREAK >NUL
+	    if !HP! LEQ 0 (
+		call %DEATH%
+		set "moveBack=1"
+		goto end
+	    )
             echo Crying Woman - COME BACK TO ME WHEN YOU HAVE SOME FOOD
             TIMEOUT /T 2 /NOBREAK >NUL
             echo "Crying noises..."
@@ -99,7 +104,40 @@ if !RitualRoomOn!==1 (
     echo Crying Woman - The ritual circle is has been activated
     TIMEOUT /T 2 /NOBREAK >NUL
     echo Crying Woman - Feel free to use it whenever you need, my hero
+    echo(
+    echo You Can:
+    echo Use ritual circle (RitualCircle)
+    echo(
 )
 
+:end
+
+for %%H in (!HP!) do (
+    for %%T in ("!SlotThree!") do (
+	for %%W in ("!SlotTwo!") do (
+	    for %%O in ("!SlotOne!") do (
+		for %%R in (!RitualRoomOn!) do (
+		    for %%C in (!Coins!) do (
+			for %%M in (!moveback!) do (
+        	            endlocal
+        	            set HP=%%H
+		            set SlotOne=%%~O
+		            set SlotTwo=%%~W
+        	            set SlotThree=%%~T
+		            set RitualRoomOn=%%R
+			    set Coins=%%C
+			    set "shouldMove=%%M"
+			)
+		    )
+		)
+	    )
+	)
+    )
+)
 pause
+
+if "%shouldMove%"=="1" (
+    cd %ENTRANCE%
+    call StoneTablet.bat
+)
 

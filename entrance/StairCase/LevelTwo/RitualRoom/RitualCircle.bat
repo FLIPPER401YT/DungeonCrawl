@@ -21,15 +21,17 @@ if !RitualRoomOn!==1 (
 	TIMEOUT /T 2 /NOBREAK >NUL
 	echo(
 	echo You haved gained 5 HP
-	set /A HP=%HP% + 5
-	TIMEOUT /T 2 /NOBREAK >NUL
-	echo Your HP is now %HP%
+	set /A HP+=5
+	echo Your HP is now !HP!
 	echo(
+	set RitualRoomOn=0
+	pause
     ) else (
 	echo You decide to leave the circle be for now
 	TIMEOUT /T 2 /NOBREAK >NUL
 	echo It will be useful to you later
 	echo(
+	pause
     )
 ) else (
     echo(
@@ -39,4 +41,13 @@ if !RitualRoomOn!==1 (
     TIMEOUT /T 2 /NOBREAK >NUL
     echo The crying woman might know something
     echo(
+    pause
+)
+
+for %%H in (!HP!) do (
+    for %%R in (!RitualRoomOn!) do (
+	endlocal
+	set HP=%%H
+	set RitualRoomOn=%%R
+    )
 )

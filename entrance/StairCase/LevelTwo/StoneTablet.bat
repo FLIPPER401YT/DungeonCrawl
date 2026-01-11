@@ -10,4 +10,5 @@ echo path.
 echo(
 echo To go back, type: cd ..
 echo To carry on, type: cd RitualRoom
+echo To go to the next level, type cd StairCase
 echo(
